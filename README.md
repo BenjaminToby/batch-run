@@ -13,7 +13,7 @@ npx batch-run "npm run dev, npm run tailwind"
 To install this module globally simply run:
 
 ```bash
-npm install -G batch-run
+npm install -g batch-run
 ```
 
 To install this module locally(for just the project) run:
