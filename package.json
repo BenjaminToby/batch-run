@@ -1,10 +1,11 @@
 {
     "name": "batch-run",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Run and manage multiple processes concurrently in one terminal",
     "main": "index.js",
     "bin": {
-        "batch-run": "index.js"
+        "batch-run": "./index.js",
+        "batchrun": "./index.js"
     },
     "repository": {
         "type": "git",
