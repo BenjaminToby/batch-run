@@ -220,5 +220,5 @@ function killProcessForce(pid) {
     } catch (error) {}
 }
 
-console.log(` - ${colors.FgGreen}Started ${processes.length} processes${colors.Reset}`);
+console.log(` - ${colors.FgGreen}Started ${processesStrings.length} processes${colors.Reset}`);
 startProcesses();
