@@ -89,16 +89,16 @@ const argvProcessList = process.argv.at(-1);
 
 const processesFilePath = path.resolve(process.cwd(), "batchrun.config.json");
 
-if (argvProcessList) {
-    const processesArray = argvProcessList.split(",");
+if (fs.existsSync(processesFilePath)) {
+    const processesFile = fs.readFileSync(processesFilePath, "utf8");
+    const processesArray = JSON.parse(processesFile);
     for (let i = 0; i < processesArray.length; i++) {
         const processString = processesArray[i];
         const strippedProcessString = processString.trim();
         processesStrings.push(strippedProcessString);
     }
-} else if (fs.existsSync(processesFilePath)) {
-    const processesFile = fs.readFileSync(processesFilePath, "utf8");
-    const processesArray = JSON.parse(processesFile);
+} else if (argvProcessList) {
+    const processesArray = argvProcessList.split(",");
     for (let i = 0; i < processesArray.length; i++) {
         const processString = processesArray[i];
         const strippedProcessString = processString.trim();
