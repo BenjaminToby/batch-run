@@ -7,19 +7,19 @@ Do you run an application that needs multiple processes? Like `npm run dev` and 
 You can install and run this package directly by running:
 
 ```bash
-npx batch-run "npm run dev, npm run tailwind"
+npx batchrun "npm run dev, npm run tailwind"
 ```
 
 To install this module globally simply run:
 
 ```bash
-npm install -g batch-run
+npm install -g batchrun
 ```
 
 To install this module locally(for just the project) run:
 
 ```bash
-npm install batch-run
+npm install batchrun
 ```
 
 _NOTE_: You will have to append `npx` to your command for just a local installation.
@@ -39,19 +39,19 @@ More entries mean more processes.
 To fire up the process without a `batchrun.config.json` file simply run:
 
 ```bash
-batch-run "npm run dev, npm run tailwind"
+batchrun "npm run dev, npm run tailwind"
 ```
 
 If you did not install the package globally, run:
 
 ```bash
-npx batch-run "npm run dev, npm run tailwind"
+npx batchrun "npm run dev, npm run tailwind"
 ```
 
 If you already have a `batchrun.config.json` file just run
 
 ```bash
-batch-run
+batchrun
 ```
 
 # Process actions
