@@ -1,0 +1,20 @@
+{
+    "name": "batch-run",
+    "version": "1.0.0",
+    "description": "Run and manage multiple processes concurrently in one terminal",
+    "main": "index.js",
+    "bin": {
+        "batch-run": "index.js"
+    },
+    "keywords": [
+        "process",
+        "batch",
+        "autoreload",
+        "terminal",
+        "cli",
+        "server",
+        "monitor"
+    ],
+    "author": "Benjamin Toby",
+    "license": "MIT"
+}
