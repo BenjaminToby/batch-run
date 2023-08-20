@@ -86,8 +86,12 @@ process.on("exit", (code) => {
 
 const argvProcessListIndex = process.argv.indexOf("batch-run") + 1;
 const argvProcessList = process.argv.at(-1);
-
 const processesFilePath = path.resolve(process.cwd(), "batchrun.config.json");
+
+if (argvProcessList?.match(/batchrun/i) && !fs.existsSync(processesFilePath)) {
+    console.error(` - ${colors.FgRed}Error:${colors.Reset} No arguments to run`);
+    process.exit(1);
+}
 
 if (fs.existsSync(processesFilePath)) {
     const processesFile = fs.readFileSync(processesFilePath, "utf8");
