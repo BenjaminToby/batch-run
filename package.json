@@ -1,6 +1,6 @@
 {
     "name": "batchrun",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Run and manage multiple processes concurrently in one terminal",
     "main": "index.js",
     "bin": {

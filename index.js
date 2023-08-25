@@ -26,8 +26,16 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
-// Listen for user input
 rl.on("line", (input) => {
+    readCommands(input);
+});
+
+/**
+ * Read Lines and execute commands
+ * @param {string} input
+ * @returns
+ */
+function readCommands(input) {
     if (input?.match(/^(reload|restart|reboot)$/i)) {
         console.log(` - ${colors.FgBlue}Reloading processes ...${colors.Reset}`);
         restartAll();
@@ -66,7 +74,7 @@ rl.on("line", (input) => {
             console.log(` - ${colors.FgGreen}Processes Killed ${processedIndexesString} ...${colors.Reset}`);
         }
     }
-});
+}
 
 process.stdin.on("keypress", (character, key) => {
     if (key.ctrl && key.name === "r") {
@@ -122,7 +130,7 @@ if (!processesStrings?.[0]) {
 const spawnOptions = {
     cwd: process.cwd(),
     shell: process.platform.match(/win/i) ? "bash.exe" : undefined,
-    stdio: "inherit",
+    stdio: ["pipe", "inherit", "inherit"],
 };
 
 /**
@@ -134,8 +142,37 @@ function startProcesses() {
         const processStringArray = processString.split(" ");
         const targetProcess = processStringArray.shift();
         if (targetProcess) {
-            const process = spawn(targetProcess, processStringArray, spawnOptions);
-            processes.push(process);
+            const childProcess = spawn(targetProcess, processStringArray, spawnOptions);
+            if (childProcess) {
+                processes.push(childProcess);
+
+                // childProcess.stdin?.on("keypress", (character, key) => {
+                //     if (key.ctrl && key.name === "r") {
+                //         console.log(` - ${colors.FgBlue}Reloading processes ...${colors.Reset}`);
+                //         restartAll();
+                //     }
+                // });
+
+                // childProcess.on("error", (error) => {
+                //     console.log(` - ${colors.FgRed}Error:${colors.Reset} ${error.message}`);
+                //     killOne(i.toString());
+                // });
+
+                // childProcess.on("exit", (code, signal) => {
+                //     console.log(` - ${colors.FgRed}Error:${colors.Reset} Process ${i} exited with code ${code} and signal ${signal}`);
+                //     killOne(i.toString());
+                // });
+
+                // childProcess.on("message", (code, signal) => {
+                //     console.log(` - ${colors.FgRed}Error:${colors.Reset} Process ${i} exited with code ${code} and signal ${signal}`);
+                //     killOne(i.toString());
+                // });
+
+                // childProcess.stdin?.pipe(process.stdin);
+            } else {
+                console.error(` - ${colors.FgRed}Error:${colors.Reset} Failed to start process ${i}`);
+                process.exit(1);
+            }
         } else {
             console.error(` - ${colors.FgRed}Error:${colors.Reset} A target process is not defined in \`${processString}\``);
             process.exit(1);
